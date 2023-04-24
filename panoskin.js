@@ -4,7 +4,7 @@ var PANOSKIN = {
   createViewer: function (obj) {
     var id = obj.id;
     var tour = obj.tour;
-    var url = obj.domain ? obj.domain : "viewer.panoskin.com";
+    var url = obj.domain ? obj.domain : "tour.tourbuilder.com";
     var legacy = obj.legacy;
     var admin = obj.admin;
     var campusMapStart = obj.campusMapStart;
@@ -390,14 +390,15 @@ PANOSKIN.event(window, "message", function (e) {
     .replace("http://", "")
     .replace("https://", "")
     .replace("viewer.", "")
-    .replace("panoskin.", "")
+    .replace("tour.", "")
+    .replace("tour-staging.", "")
     .replace("www.", "")
     .split(":")[0]
     .toLowerCase();
 
   var data = JSON.parse(e.data);
 
-  if (domain == "panoskin" || domain == "localhost") {
+  if (domain == "tourbuilder" || domain == "localhost") {
     PANOSKIN[data.fnc](data.param);
   }
 });
