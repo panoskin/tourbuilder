@@ -1,3 +1,5 @@
+/* eslint-disable no-redeclare */
+
 var PANOSKIN = {
   createViewer: function (obj) {
     var id = obj.id;
@@ -114,6 +116,7 @@ var PANOSKIN = {
     var carouselClick = settings.carouselClick || {};
     var conversions = settings.conversions || {};
     var imageGalleryViewSettings = settings.imageGalleryView || {};
+    // eslint-disable-next-line no-unused-vars
     var videoGalleryViewSettings = settings.videoGalleryView || {};
 
     var trackingId = settings.trackingId;
@@ -159,6 +162,7 @@ var PANOSKIN = {
       eventLabel,
       page,
       pageTitle,
+      // eslint-disable-next-line no-unused-vars
       id
     ) {
       trackers.forEach(function (tracker) {
