@@ -17,9 +17,11 @@ jobs:
         run: npm ci
       - name: Build dist
         run: npm run build
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.CDN_S3_SECRET_KEY }}
+          aws-secret-access-key: ${{ secrets.CDN_S3_ACCESS_KEY }}
+          aws-region: ${{ vars.AWS_DEFAULT_REGION }}
       - name: Deploy to public s3
         run: aws s3 cp dist/tourbuilder.js s3://${{ vars.AWS_BUCKET_NAME }}/scripts/
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.CDN_S3_SECRET_KEY }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.CDN_S3_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
