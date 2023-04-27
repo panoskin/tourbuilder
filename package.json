@@ -2,7 +2,7 @@
   "name": "tourbuilder",
   "version": "1.0.0",
   "description": "",
-  "main": "panoskin.js",
+  "main": "tourbuilder.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
