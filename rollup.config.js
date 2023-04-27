@@ -3,9 +3,9 @@
 const terser = require("@rollup/plugin-terser");
 
 module.exports = {
-  input: "panoskin.js",
+  input: "tourbuilder.js",
   output: {
-    file: "dist/bundle.js",
+    file: "dist/tourbuilder.js",
     format: "iife",
   },
   plugins: [terser()],
