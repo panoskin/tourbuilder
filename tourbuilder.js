@@ -1,7 +1,5 @@
 /* eslint-disable no-redeclare */
 
-console.log('cache cleared');
-
 var PANOSKIN = {
   createViewer: function (obj) {
     var id = obj.id;
