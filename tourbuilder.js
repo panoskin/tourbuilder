@@ -1,7 +1,7 @@
 /* eslint-disable no-redeclare */
 
-/* global PANOSKIN */
-window.PANOSKIN = {
+/* global TOURBUILDER */
+window.TOURBUILDER = {
   createViewer: function (obj) {
     var id = obj.id;
     var tour = obj.tour;
@@ -366,17 +366,17 @@ window.PANOSKIN = {
     if (!param.id) return;
 
     var id = param.id;
-    var e = (PANOSKIN.fullscreenedTour = document.getElementById(id));
+    var e = (TOURBUILDER.fullscreenedTour = document.getElementById(id));
 
     if (e.getAttribute("data-attr-fullscreen"))
-      PANOSKIN.fireEvent(e, "exitFullScreen");
-    else PANOSKIN.fireEvent(e, "enterFullScreen");
+      TOURBUILDER.fireEvent(e, "exitFullScreen");
+    else TOURBUILDER.fireEvent(e, "enterFullScreen");
   },
   exitFullScreen: function (param) {
     var id = param.id;
-    var e = (PANOSKIN.fullscreenedTour = document.getElementById(id));
+    var e = (TOURBUILDER.fullscreenedTour = document.getElementById(id));
 
-    PANOSKIN.fireEvent(e, "exitFullScreen");
+    TOURBUILDER.fireEvent(e, "exitFullScreen");
   },
   redirect: function (param) {
     //if (param.url) document.location = param.url;
@@ -385,7 +385,7 @@ window.PANOSKIN = {
 };
 
 // Cross Frame Event from panoskin.com
-PANOSKIN.event(window, "message", function (e) {
+TOURBUILDER.event(window, "message", function (e) {
   var domain = e.origin
     .split(".com")[0]
     .replace("http://", "")
@@ -400,7 +400,7 @@ PANOSKIN.event(window, "message", function (e) {
   var data = JSON.parse(e.data);
 
   if (domain == "tourbuilder" || domain == "localhost") {
-    PANOSKIN[data.fnc](data.param);
+    TOURBUILDER[data.fnc](data.param);
   }
 });
 
