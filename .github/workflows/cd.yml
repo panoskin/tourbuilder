@@ -13,7 +13,7 @@ jobs:
       MINIFIED_SCRIPT_FILENAME: ${{ steps.set-minified-script-filename.outputs.MINIFIED_SCRIPT_FILENAME }}
     steps:
       - uses: actions/checkout@v3
-      - id: set-raw-script-filename
+      - id: set-script-filename
         run: echo "SCRIPT_FILENAME=${{ github.ref_name == 'master' && 'tourbuilder.js' || 'tourbuilder.dev.js' }}" >> $GITHUB_OUTPUT
       - id: set-minified-script-filename
         run: echo "MINIFIED_SCRIPT_FILENAME=${{ github.ref_name == 'master' && 'tourbuilder.min.js' || 'tourbuilder.dev.min.js' }}" >> $GITHUB_OUTPUT
