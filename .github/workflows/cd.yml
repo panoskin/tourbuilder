@@ -18,6 +18,7 @@ jobs:
       - id: set-minified-script-filename
         run: echo "MINIFIED_SCRIPT_FILENAME=${{ github.ref_name == 'master' && 'tourbuilder.min.js' || 'tourbuilder.dev.min.js' }}" >> $GITHUB_OUTPUT
   cd:
+    needs: [params]
     runs-on: ubuntu-latest
     environment: production
     steps:
