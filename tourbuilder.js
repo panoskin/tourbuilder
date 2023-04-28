@@ -1,6 +1,7 @@
 /* eslint-disable no-redeclare */
 
-var PANOSKIN = {
+/* global PANOSKIN */
+window.PANOSKIN = {
   createViewer: function (obj) {
     var id = obj.id;
     var tour = obj.tour;
