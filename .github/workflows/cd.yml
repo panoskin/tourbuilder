@@ -1,12 +1,24 @@
 on:
   push:
-    branches: [master]
+    branches: [master, develop]
 
 env:
   NODE_VERSION: 18.4.0
 
 jobs:
+  params:
+    runs-on: ubuntu-latest
+    outputs:
+      SCRIPT_FILENAME: ${{ steps.set-script-filename.outputs.SCRIPT_FILENAME }}
+      MINIFIED_SCRIPT_FILENAME: ${{ steps.set-minified-script-filename.outputs.MINIFIED_SCRIPT_FILENAME }}
+    steps:
+      - uses: actions/checkout@v3
+      - id: set-script-filename
+        run: echo "SCRIPT_FILENAME=${{ github.ref_name == 'master' && 'tourbuilder.js' || 'tourbuilder.dev.js' }}" >> $GITHUB_OUTPUT
+      - id: set-minified-script-filename
+        run: echo "MINIFIED_SCRIPT_FILENAME=${{ github.ref_name == 'master' && 'tourbuilder.min.js' || 'tourbuilder.dev.min.js' }}" >> $GITHUB_OUTPUT
   cd:
+    needs: [params]
     runs-on: ubuntu-latest
     environment: production
     steps:
@@ -18,11 +30,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Build dist
-        run: npm run build
+        run: npm run build -- --file dist/${{ needs.params.outputs.MINIFIED_SCRIPT_FILENAME }}
       - name: Deploy to public s3
         run: |
-          aws s3 cp dist/tourbuilder.min.js s3://${{ vars.AWS_BUCKET_NAME }}/scripts/
-          aws s3 cp tourbuilder.js s3://${{ vars.AWS_BUCKET_NAME }}/scripts/
+          aws s3 cp dist/${{ needs.params.outputs.MINIFIED_SCRIPT_FILENAME }} s3://${{ vars.AWS_BUCKET_NAME }}/scripts/
+          aws s3 cp tourbuilder.js s3://${{ vars.AWS_BUCKET_NAME }}/scripts/${{ needs.params.outputs.SCRIPT_FILENAME }}
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.CDN_S3_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.CDN_S3_SECRET_KEY }}
@@ -33,4 +45,4 @@ jobs:
             -H "X-Auth-Email: ${{ secrets.CDN_API_AUTH_EMAIL }}" \
             -H "Authorization: Bearer ${{ secrets.CDN_API_AUTH_KEY }}" \
             -H "Content-Type: application/json" \
-            --data '{"files":["https://static.tourbuilder.com/scripts/tourbuilder.min.js"]}'
+            --data '{"files":["https://static.tourbuilder.com/scripts/${{ needs.params.outputs.SCRIPT_FILENAME }}", "https://static.tourbuilder.com/scripts/${{ needs.params.outputs.MINIFIED_SCRIPT_FILENAME }}"]}'
