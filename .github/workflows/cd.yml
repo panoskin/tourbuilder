@@ -1,5 +1,7 @@
-on: push
-
+on:
+  push:
+    branches: [master]
+    
 env:
   NODE_VERSION: 18.4.0
 
