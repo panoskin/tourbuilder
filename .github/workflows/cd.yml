@@ -25,3 +25,10 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.CDN_S3_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.CDN_S3_SECRET_KEY }}
           AWS_DEFAULT_REGION: ${{ vars.AWS_DEFAULT_REGION }}
+      - name: Clear CDN Cache
+        run: |
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/${{ secrets.CDN_API_ZONE_IDENTIFIER }}/purge_cache" \
+            -H "X-Auth-Email: ${{ secrets.CDN_API_AUTH_EMAIL }}" \
+            -H "Authorization: Bearer ${{ secrets.CDN_API_AUTH_KEY }}" \
+            -H "Content-Type: application/json" \
+            --data '{"files":["https://static.tourbuilder.com/scripts/tourbuilder.min.js"]}'
