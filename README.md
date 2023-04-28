@@ -1,3 +1,14 @@
+![node](https://img.shields.io/badge/node-18.4.0-brightgreen.svg) ![code](https://img.shields.io/badge/code%20quality-A-blue)
+
+```
+████████╗ ██████╗ ██╗   ██╗██████╗ ██████╗ ██╗   ██╗██╗██╗     ██████╗ ███████╗██████╗ 
+╚══██╔══╝██╔═══██╗██║   ██║██╔══██╗██╔══██╗██║   ██║██║██║     ██╔══██╗██╔════╝██╔══██╗
+   ██║   ██║   ██║██║   ██║██████╔╝██████╔╝██║   ██║██║██║     ██║  ██║█████╗  ██████╔╝
+   ██║   ██║   ██║██║   ██║██╔══██╗██╔══██╗██║   ██║██║██║     ██║  ██║██╔══╝  ██╔══██╗
+   ██║   ╚██████╔╝╚██████╔╝██║  ██║██████╔╝╚██████╔╝██║███████╗██████╔╝███████╗██║  ██║
+   ╚═╝    ╚═════╝  ╚═════╝ ╚═╝  ╚═╝╚═════╝  ╚═════╝ ╚═╝╚══════╝╚═════╝ ╚══════╝╚═╝  ╚═╝
+```
+
 # TourBuilder
 A client library used to load the TourBuilder viewer
 
@@ -5,7 +16,7 @@ A client library used to load the TourBuilder viewer
 Load TourBuilder by referencing the latest minified version served from our CDN.
 
 ```html
-<script src="//cdn.tourbuilder.com/tourbuilder.min.js"></script>
+<script src="//static.tourbuilder.com/scripts/tourbuilder.min.js"></script>
 ```
 
 Call the createViewer method after loading the TourBuilder library, passing in an id of the container you want to load the tour into and the tour id that you want to load. Note, your domain(s) will need to be whitelisted for the tours you are attempting to load.
@@ -13,7 +24,7 @@ Call the createViewer method after loading the TourBuilder library, passing in a
 ```html
 <div id="pano"></div>
 
-<script src="//cdn.tourbuilder.com/tourbuilder.min.js"></script>
+<script src="//static.tourbuilder.com/scripts/tourbuilder.min.js"></script>
 <script>
   TOURBUILDER.createViewer({
     id: 'pano',
