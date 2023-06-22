@@ -357,10 +357,6 @@ window.TOURBUILDER = {
 
     TOURBUILDER.fireEvent(e, "exitFullScreen");
   },
-  redirect: function (param) {
-    //if (param.url) document.location = param.url;
-    if (param.url) document.location = param.url;
-  },
 };
 
 // Cross Frame Event from panoskin.com
