@@ -86,10 +86,6 @@ window.TOURBUILDER = {
       e.setAttribute("style", style);
     });
   },
-  event: function (el, event, fnc) {
-    if (el.attachEvent) el.attachEvent("on" + event, fnc);
-    else if (el.addEventListener) el.addEventListener(event, fnc, false);
-  },
   GA: function (param) {
     var settings = this.gaSettings || {};
     var enabled = settings.enabled === undefined ? true : settings.enabled;
@@ -368,8 +364,8 @@ window.TOURBUILDER = {
 };
 
 // Cross Frame Event from panoskin.com
-TOURBUILDER.event(window, "message", function (e) {
-  var domain = e.origin
+window.addEventListener("message", function (event) {
+  var domain = event.origin
     .split(".com")[0]
     .replace("http://", "")
     .replace("https://", "")
@@ -380,7 +376,7 @@ TOURBUILDER.event(window, "message", function (e) {
     .split(":")[0]
     .toLowerCase();
 
-  var data = JSON.parse(e.data);
+  var data = JSON.parse(event.data);
 
   if (domain == "tourbuilder" || domain == "localhost") {
     TOURBUILDER[data.fnc](data.param);
