@@ -318,12 +318,9 @@ window.TOURBUILDER = {
   fireEvent: function (param) {
     if (!param) return;
 
-    var viewer = this.viewer;
-    var evtName = param.eventName || "";
-    var evtData = param.data || {};
-    var event = new CustomEvent(evtName, { detail: evtData });
-
-    viewer.dispatchEvent(event);
+    this.viewer.dispatchEvent(
+      new CustomEvent(param.eventName || "", { detail: param.data || {} })
+    );
   },
 };
 
