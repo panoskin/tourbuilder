@@ -97,9 +97,6 @@ window.TOURBUILDER = {
     var trackConversion = param.trackConversion;
     var panoid = param.panoid;
 
-    // Fire custom events
-    this.fireEvent();
-
     if (!enabled) return; //console.warn('Google Analytics disabled')
     if (!ga) return console.warn("No Google Analytics found");
 
