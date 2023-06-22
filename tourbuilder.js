@@ -86,23 +86,6 @@ window.TOURBUILDER = {
       e.setAttribute("style", style);
     });
   },
-  popup: function (obj) {
-    var obj = obj || {};
-    var url = obj.url;
-    var width = obj.width || 500;
-    var height = obj.height || 500;
-    var name = obj.name || "_blank";
-
-    window.open(
-      url,
-      name,
-      "left=20,top=20,width=" +
-        width +
-        ",height=" +
-        height +
-        ",toolbar=1,resizable=0"
-    );
-  },
   event: function (el, event, fnc) {
     if (el.attachEvent) el.attachEvent("on" + event, fnc);
     else if (el.addEventListener) el.addEventListener(event, fnc, false);
