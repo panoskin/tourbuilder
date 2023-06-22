@@ -66,25 +66,9 @@ window.TOURBUILDER = {
     iframe.setAttribute("title", "3D Virtual Tour");
     iframe.className = "ps_panoskinTour";
 
-    var pano = (this.viewer = document.getElementById(id));
-    pano.appendChild(iframe);
+    this.viewer = document.getElementById(id);
 
-    var style = pano.getAttribute("style") || "";
-
-    pano.addEventListener("enterFullScreen", function () {
-      var e = pano;
-      e.setAttribute("data-attr-fullscreen", "true");
-      e.setAttribute(
-        "style",
-        "position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000000;max-width:100%;max-height:100%;"
-      );
-    });
-
-    pano.addEventListener("exitFullScreen", function () {
-      var e = pano;
-      e.removeAttribute("data-attr-fullscreen");
-      e.setAttribute("style", style);
-    });
+    this.viewer.appendChild(iframe);
   },
   GA: function (param) {
     var settings = this.gaSettings || {};
@@ -340,22 +324,6 @@ window.TOURBUILDER = {
     var event = new CustomEvent(evtName, { detail: evtData });
 
     viewer.dispatchEvent(event);
-  },
-  fullScreen: function (param) {
-    if (!param.id) return;
-
-    var id = param.id;
-    var e = (TOURBUILDER.fullscreenedTour = document.getElementById(id));
-
-    if (e.getAttribute("data-attr-fullscreen"))
-      TOURBUILDER.fireEvent(e, "exitFullScreen");
-    else TOURBUILDER.fireEvent(e, "enterFullScreen");
-  },
-  exitFullScreen: function (param) {
-    var id = param.id;
-    var e = (TOURBUILDER.fullscreenedTour = document.getElementById(id));
-
-    TOURBUILDER.fireEvent(e, "exitFullScreen");
   },
 };
 
