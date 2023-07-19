@@ -69,7 +69,7 @@ window.TOURBUILDER = {
     this.viewer.appendChild(iframe);
   },
   GA: function (param) {
-    if (!window.gtag) {
+    if (!window.gtag && !window.dataLayer) {
       return console.warn("No Google Analytics found");
     }
 
@@ -78,10 +78,21 @@ window.TOURBUILDER = {
     var targetTrackingId = this.gaSettings.trackingId;
 
     if (!analyticsEnabled) {
+      console.log("TourBuilder analytics are disabled");
       return;
     }
 
-    window.gtag("event", param.eventName, {
+    if (window.gtag) {
+      window.gtag("event", param.eventName, {
+        ...param.eventParams,
+        ...(Boolean(targetTrackingId) && { send_to: targetTrackingId }),
+      });
+
+      return;
+    }
+
+    window.dataLayer.push({
+      event: param.eventName,
       ...param.eventParams,
       ...(Boolean(targetTrackingId) && { send_to: targetTrackingId }),
     });
