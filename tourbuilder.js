@@ -1,19 +1,18 @@
 /* eslint-disable no-redeclare */
 
-const UTM_PARAMS = [
-  "utm_id",
-  "utm_source",
-  "utm_medium",
-  "utm_campaign",
-  "utm_source_platform",
-  "utm_term",
-  "utm_content",
-  "utm_creative_format",
-  "utm_marketing_tactic",
-];
-
 /* global TOURBUILDER */
 window.TOURBUILDER = {
+  utmParams: [
+    "utm_id",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_source_platform",
+    "utm_term",
+    "utm_content",
+    "utm_creative_format",
+    "utm_marketing_tactic",
+  ],
   gaSettings: {},
   viewer: null,
   createViewer: function (obj) {
@@ -63,7 +62,7 @@ window.TOURBUILDER = {
     }
 
     const locationSearchParams = new URLSearchParams(window.location.search);
-    UTM_PARAMS.forEach((utmParamName) => {
+    this.utmParams.forEach((utmParamName) => {
       const utmParamValue = locationSearchParams.get(utmParamName);
 
       if (utmParamValue) {
