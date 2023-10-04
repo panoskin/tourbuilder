@@ -44,10 +44,11 @@ Some optional CSS to make your container fluid
   }
 ```
 
-Versioning
-```bash
-git add --all
-git commit -m "Releasing v1.0.9"
-git tag v1.0.9
-git push origin master --tags
+## Development
+
+```sh
+make dev
+
+# Open localhost:8080 in your browser
+# Customize dev.html for your needs
 ```

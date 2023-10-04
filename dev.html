@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+
+        console.log("gtag", arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "TAG_ID");
+    </script>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tourbuilder.js - development</title>
+    <link
+      href="https://necolas.github.io/normalize.css/latest/normalize.css"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      .container {
+        display: grid;
+        height: 100vh;
+        grid-template-rows: 60px 1fr 60px;
+      }
+
+      .header,
+      .footer {
+        align-self: center;
+        justify-self: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">tourbuilder.js - development</div>
+      <div id="tour"></div>
+      <div class="footer">Powered by LCP Media</div>
+    </div>
+
+    <!-- production -->
+    <!-- <script src="https://static.tourbuilder.com/scripts/tourbuilder.js"></script> -->
+    <!-- <script src="https://static.tourbuilder.com/scripts/tourbuilder.min.js"></script> -->
+
+    <!-- dev -->
+    <!-- <script src="https://static.tourbuilder.com/scripts/tourbuilder.dev.js"></script> -->
+    <!-- <script src="https://static.tourbuilder.com/scripts/tourbuilder.dev.min.js"></script> -->
+
+    <!-- local  -->
+    <script src="./tourbuilder.js"></script>
+
+    <script>
+      const CUSTOM_EVENTS = [
+        "Tour Initialized",
+        "Menu Click",
+        "Conversion",
+        "360 Scene View",
+        "Image Gallery View",
+        "Video Gallery View",
+        "Hotspot Click",
+        "Area Click",
+      ];
+
+      TOURBUILDER.createViewer({
+        id: "tour",
+        tour: "",
+        // domain: "tour-staging.tourbuilder.com",
+        // legacy: true,
+        // admin: true,
+        // campusMapStart: true,
+        // hideFullScreen: true,
+        // campusMapStart: true,
+        // panoStart: {
+        //   panoid: "62e2b147160c2658871252c5",
+        //   pov: {
+        //     heading: 180,
+        //     pitch: 45,
+        //     zoom: 1,
+        //   },
+        // },
+        // forceSSL: true,
+        // forceNoSSL: true,
+        // themeId: '',
+        // hideFullScreen: true,
+        // hideButtons: ["info", "share"],
+        // ga: {
+        //   enabled: false,
+        //   trackingId: ''
+        // }
+      });
+
+      const tour = document.getElementById("tour");
+
+      CUSTOM_EVENTS.forEach((customEvent) => {
+        tour.addEventListener(customEvent, (event) => {
+          console.log(customEvent, event.detail);
+        });
+      });
+    </script>
+  </body>
+</html>
