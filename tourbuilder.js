@@ -2,6 +2,17 @@
 
 /* global TOURBUILDER */
 window.TOURBUILDER = {
+  utmParams: [
+    "utm_id",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_source_platform",
+    "utm_term",
+    "utm_content",
+    "utm_creative_format",
+    "utm_marketing_tactic",
+  ],
   gaSettings: {},
   viewer: null,
   createViewer: function (obj) {
@@ -50,6 +61,15 @@ window.TOURBUILDER = {
       frameSrc += "&hideButtons=" + hideButtons.join();
     }
 
+    const locationSearchParams = new URLSearchParams(window.location.search);
+    this.utmParams.forEach((utmParamName) => {
+      const utmParamValue = locationSearchParams.get(utmParamName);
+
+      if (utmParamValue) {
+        frameSrc += `&${utmParamName}=${utmParamValue}`;
+      }
+    });
+
     iframe.src = frameSrc;
     iframe.style.width = "100%";
     iframe.style.height = "100%";
@@ -69,7 +89,7 @@ window.TOURBUILDER = {
     this.viewer.appendChild(iframe);
   },
   GA: function (param) {
-    if (!window.gtag) {
+    if (!window.gtag && !window.dataLayer) {
       return console.warn("No Google Analytics found");
     }
 
@@ -78,10 +98,21 @@ window.TOURBUILDER = {
     var targetTrackingId = this.gaSettings.trackingId;
 
     if (!analyticsEnabled) {
+      console.log("TourBuilder analytics are disabled");
       return;
     }
 
-    window.gtag("event", param.eventName, {
+    if (window.gtag) {
+      window.gtag("event", param.eventName, {
+        ...param.eventParams,
+        ...(Boolean(targetTrackingId) && { send_to: targetTrackingId }),
+      });
+
+      return;
+    }
+
+    window.dataLayer.push({
+      event: param.eventName,
       ...param.eventParams,
       ...(Boolean(targetTrackingId) && { send_to: targetTrackingId }),
     });
