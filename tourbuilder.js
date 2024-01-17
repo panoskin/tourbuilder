@@ -15,6 +15,7 @@ window.TOURBUILDER = {
   ],
   gaSettings: {},
   viewer: null,
+  style: "",
   createViewer: function (obj) {
     var id = obj.id;
     var tour = obj.tour;
@@ -86,6 +87,8 @@ window.TOURBUILDER = {
 
     this.viewer = document.getElementById(id);
 
+    this.style = this.viewer.getAttribute("style");
+
     this.viewer.appendChild(iframe);
   },
   GA: function (param) {
@@ -124,6 +127,21 @@ window.TOURBUILDER = {
       new CustomEvent(param.eventName || "", { detail: param.data || {} })
     );
   },
+  fullScreen: function(param) {
+    if (this.viewer.hasAttribute("data-attr-fullscreen")) {
+      TOURBUILDER.exitFullScreen(param);
+      return;
+    }
+    TOURBUILDER.enterFullScreen(param)
+  },
+  enterFullScreen: function() {
+    this.viewer.setAttribute('data-attr-fullscreen', 'true');
+    this.viewer.setAttribute('style', 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000000;max-width:100%;max-height:100%;');
+  },
+  exitFullScreen: function() {
+    this.viewer.removeAttribute('data-attr-fullscreen');
+    this.viewer.setAttribute('style', this.style);
+  }
 };
 
 window.addEventListener("message", function (event) {
