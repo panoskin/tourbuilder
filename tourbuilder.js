@@ -127,21 +127,24 @@ window.TOURBUILDER = {
       new CustomEvent(param.eventName || "", { detail: param.data || {} })
     );
   },
-  fullScreen: function(param) {
+  fullScreen: function (param) {
     if (this.viewer.hasAttribute("data-attr-fullscreen")) {
       TOURBUILDER.exitFullScreen(param);
       return;
     }
-    TOURBUILDER.enterFullScreen(param)
+    TOURBUILDER.enterFullScreen(param);
   },
-  enterFullScreen: function() {
-    this.viewer.setAttribute('data-attr-fullscreen', 'true');
-    this.viewer.setAttribute('style', 'position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000000;max-width:100%;max-height:100%;');
+  enterFullScreen: function () {
+    this.viewer.setAttribute("data-attr-fullscreen", "true");
+    this.viewer.setAttribute(
+      "style",
+      "position:fixed;top:0;left:0;width:100%;height:100%;z-index:1000000;max-width:100%;max-height:100%;"
+    );
   },
-  exitFullScreen: function() {
-    this.viewer.removeAttribute('data-attr-fullscreen');
-    this.viewer.setAttribute('style', this.style);
-  }
+  exitFullScreen: function () {
+    this.viewer.removeAttribute("data-attr-fullscreen");
+    this.viewer.setAttribute("style", this.style);
+  },
 };
 
 window.addEventListener("message", function (event) {
