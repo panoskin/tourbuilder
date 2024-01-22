@@ -129,10 +129,10 @@ window.TOURBUILDER = {
   },
   fullScreen: function (param) {
     if (this.viewer.hasAttribute("data-attr-fullscreen")) {
-      TOURBUILDER.exitFullScreen(param);
+      this.exitFullScreen(param);
       return;
     }
-    TOURBUILDER.enterFullScreen(param);
+    this.enterFullScreen(param);
   },
   enterFullScreen: function () {
     this.viewer.setAttribute("data-attr-fullscreen", "true");
