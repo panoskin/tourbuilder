@@ -4,6 +4,7 @@
   "description": "",
   "main": "tourbuilder.js",
   "scripts": {
+    "dev": "esbuild tourbuilder.js --bundle --outdir=www/js --watch --servedir=www",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install"
   },
