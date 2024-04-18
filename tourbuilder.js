@@ -1,5 +1,3 @@
-/* eslint-disable no-redeclare */
-
 /* global TOURBUILDER */
 window.TOURBUILDER = {
   utmParams: [
