@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/panoskin/tourbuilder#readme",
   "devDependencies": {
+    "cypress": "^13.7.3",
     "esbuild": "0.20.2",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^9.1.0",

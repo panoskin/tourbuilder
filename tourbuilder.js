@@ -79,7 +79,10 @@ window.TOURBUILDER = {
     iframe.setAttribute("webkitallowfullscreen", "true");
     iframe.setAttribute("mozallowfullscreen", "true");
     iframe.setAttribute("scrolling", "no");
-    iframe.setAttribute("allow", "vr,gyroscope,accelerometer");
+    iframe.setAttribute(
+      "allow",
+      "accelerometer; clipboard-write; gyroscope; vr"
+    );
     iframe.setAttribute("title", "3D Virtual Tour");
     iframe.className = "ps_panoskinTour";
 
