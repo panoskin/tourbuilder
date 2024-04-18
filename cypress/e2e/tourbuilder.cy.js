@@ -1,5 +1,5 @@
-describe("tourbuilder.js", () => {
-  it("bundle should embed tour", () => {
+describe("tourbuilder", () => {
+  it("bundle should run tour in iframe", () => {
     // given
     Cypress.on("window:before:load", (win) => {
       win.TOUR_ID = "63d3f0a782070112f2c24cd0";
@@ -22,7 +22,7 @@ describe("tourbuilder.js", () => {
     );
   });
 
-  it("minified bundle should embed tour", () => {
+  it("minified bundle should run tour in iframe", () => {
     Cypress.on("window:before:load", (win) => {
       win.TOUR_ID = "63d3f0a782070112f2c24cd0";
       win.SCRIPT_SRC = "dist/tourbuilder.min.js";
