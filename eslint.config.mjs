@@ -12,4 +12,15 @@ export default [
       },
     },
   },
+  {
+    files: ["cypress/**/*.cy.js"],
+    languageOptions: {
+      globals: {
+        describe: false,
+        it: false,
+        cy: false,
+        Cypress: false,
+      },
+    },
+  },
 ];
