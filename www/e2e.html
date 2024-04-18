@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>tourbuilder.js - e2e</title>
+    <link
+      href="https://necolas.github.io/normalize.css/latest/normalize.css"
+      rel="stylesheet"
+    />
+    <style type="text/css">
+      #tour {
+        height: 100vh;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="tour"></div>
+
+    <script>
+      const script = document.createElement("script");
+
+      script.setAttribute("src", window.SCRIPT_SRC);
+
+      console.log(window.SCRIPT_SRC);
+
+      script.onload = () => {
+        console.log(window.TOUR_ID);
+
+        TOURBUILDER.createViewer({
+          id: "tour",
+          tour: window.TOUR_ID,
+        });
+      };
+
+      document.body.appendChild(script);
+    </script>
+  </body>
+</html>
