@@ -26,12 +26,9 @@ jobs:
           npx esbuild tourbuilder.js --bundle --outfile=dist/tourbuilder.js
           npx esbuild tourbuilder.js --bundle --minify --outfile=dist/tourbuilder.min.js
       - name: Start http server
-        run: |
-          npx http-server www &
-          HTTP_SERVER_PID=$!
-          echo $HTTP_SERVER_PID
+        run: npx http-server www &
       - name: Run e2e tests
-        uses: cypress-io/github-action@v4
+        uses: cypress-io/github-action@v6
         with:
           install: false
           wait-on: "http://localhost:8080"
@@ -43,8 +40,3 @@ jobs:
         with:
           name: cypress-videos
           path: cypress/videos
-      - name: Stop http server
-        if: always()
-        run: |
-          echo $HTTP_SERVER_PID
-          kill $HTTP_SERVER_PID
