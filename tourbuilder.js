@@ -1,4 +1,7 @@
 /* global TOURBUILDER */
+
+const SOURCE_ID_FORMAT = /^\d{4}$/;
+
 window.TOURBUILDER = {
   utmParams: [
     "utm_id",
@@ -61,6 +64,7 @@ window.TOURBUILDER = {
     }
 
     const locationSearchParams = new URLSearchParams(window.location.search);
+
     this.utmParams.forEach((utmParamName) => {
       const utmParamValue = locationSearchParams.get(utmParamName);
 
@@ -68,6 +72,12 @@ window.TOURBUILDER = {
         frameSrc += `&${utmParamName}=${utmParamValue}`;
       }
     });
+
+    const sourceId = obj.sourceId || locationSearchParams.get("sourceId");
+
+    if (SOURCE_ID_FORMAT.test(sourceId)) {
+      frameSrc += `&sourceId=${sourceId}`;
+    }
 
     iframe.src = frameSrc;
     iframe.style.width = "100%";
