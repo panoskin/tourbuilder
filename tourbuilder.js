@@ -73,7 +73,7 @@ window.TOURBUILDER = {
       }
     });
 
-    const sourceId = obj.sourceId || locationSearchParams.get("sourceId");
+    const sourceId = obj.sourceId;
 
     if (SOURCE_ID_FORMAT.test(sourceId)) {
       frameSrc += `&sourceId=${sourceId}`;
