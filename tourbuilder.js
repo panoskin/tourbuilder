@@ -1,6 +1,7 @@
-/* eslint-disable no-redeclare */
-
 /* global TOURBUILDER */
+
+const SOURCE_ID_FORMAT = /^\d{4}$/;
+
 window.TOURBUILDER = {
   utmParams: [
     "utm_id",
@@ -63,6 +64,7 @@ window.TOURBUILDER = {
     }
 
     const locationSearchParams = new URLSearchParams(window.location.search);
+
     this.utmParams.forEach((utmParamName) => {
       const utmParamValue = locationSearchParams.get(utmParamName);
 
@@ -70,6 +72,12 @@ window.TOURBUILDER = {
         frameSrc += `&${utmParamName}=${utmParamValue}`;
       }
     });
+
+    const sourceId = obj.sourceId;
+
+    if (SOURCE_ID_FORMAT.test(sourceId)) {
+      frameSrc += `&sourceId=${sourceId}`;
+    }
 
     iframe.src = frameSrc;
     iframe.style.width = "100%";
@@ -81,7 +89,10 @@ window.TOURBUILDER = {
     iframe.setAttribute("webkitallowfullscreen", "true");
     iframe.setAttribute("mozallowfullscreen", "true");
     iframe.setAttribute("scrolling", "no");
-    iframe.setAttribute("allow", "vr,gyroscope,accelerometer");
+    iframe.setAttribute(
+      "allow",
+      "accelerometer; clipboard-write; gyroscope; vr"
+    );
     iframe.setAttribute("title", "3D Virtual Tour");
     iframe.className = "ps_panoskinTour";
 

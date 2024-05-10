@@ -4,9 +4,9 @@
   "description": "",
   "main": "tourbuilder.js",
   "scripts": {
+    "dev": "esbuild tourbuilder.js --bundle --outdir=www/js --watch --servedir=www",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install",
-    "build": "rollup --config"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -17,12 +17,12 @@
   },
   "homepage": "https://github.com/panoskin/tourbuilder#readme",
   "devDependencies": {
-    "@rollup/plugin-terser": "^0.4.1",
-    "eslint": "^8.27.0",
-    "eslint-config-prettier": "^8.5.0",
-    "husky": "^8.0.2",
-    "prettier": "2.7.1",
-    "rollup": "^3.21.0"
+    "cypress": "^13.7.3",
+    "esbuild": "0.20.2",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "prettier": "3.2.5"
   },
   "lint-staged": {
     "**/*.{js,jsx}": [
