@@ -84,6 +84,7 @@ window.TOURBUILDER = {
     iframe.style.height = "100%";
     iframe.style.border = "none";
     iframe.frameBorder = "none";
+    iframe.name = "TourBuilder";
     iframe.setAttribute("allowtransparency", "true");
     iframe.setAttribute("allowfullscreen", "true");
     iframe.setAttribute("webkitallowfullscreen", "true");
