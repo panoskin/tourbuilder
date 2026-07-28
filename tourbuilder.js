@@ -171,9 +171,16 @@ window.addEventListener("message", function (event) {
     .split(":")[0]
     .toLowerCase();
 
-  var data = JSON.parse(event.data);
-
-  if (domain == "tourbuilder" || domain == "localhost") {
-    TOURBUILDER[data.fnc](data.param);
+  if (domain != "tourbuilder" && domain != "localhost") {
+    return;
   }
+
+  var data;
+  try {
+    data = JSON.parse(event.data);
+  } catch {
+    return;
+  }
+
+  TOURBUILDER[data.fnc](data.param);
 });
